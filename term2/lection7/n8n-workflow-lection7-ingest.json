@@ -1,0 +1,248 @@
+{
+  "name": "Lection 7 - MD to Vector Store",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "lection7-form",
+        "formTitle": "📚 Индексация документа в RAG",
+        "formDescription": "Загрузите markdown файл лекции для индексации в векторную базу данных",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "data",
+              "fieldType": "file",
+              "multipleFiles": false,
+              "acceptFileTypes": ".md",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "sourceName"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "d54af6bb-c0d6-4224-a406-d9193f4e29b0",
+      "name": "On form submission",
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2,
+      "position": [
+        96,
+        -336
+      ],
+      "webhookId": "lection7-form"
+    },
+    {
+      "parameters": {
+        "model": "text-embedding-multilingual-e5-small",
+        "options": {
+          "baseURL": "http://host.docker.internal:1234/v1"
+        }
+      },
+      "id": "c9463abe-5b88-4046-99d3-d703a285189e",
+      "name": "OpenAI Embeddings",
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1,
+      "position": [
+        736,
+        -144
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "aDOkrShCG8ISkFIC",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chunkSize": 800,
+        "chunkOverlap": 200,
+        "options": {}
+      },
+      "id": "ed42cb28-e7f8-4400-93d3-d3d1e2a639da",
+      "name": "Recursive Text Splitter",
+      "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
+      "typeVersion": 1,
+      "position": [
+        1136,
+        16
+      ],
+      "notesInFlow": true,
+      "notes": "Разбивает текст на чанки с перекрытием"
+    },
+    {
+      "parameters": {
+        "content": "={{ $json.text }}",
+        "options": {
+          "metadata": {
+            "metadataValues": [
+              {
+                "name": "source",
+                "value": "={{ $('On form submission').item.json.sourceName || 'lection7.md' }}"
+              },
+              {
+                "name": "indexed_at",
+                "value": "={{ $now.toISO() }}"
+              },
+              {
+                "name": "document_type",
+                "value": "lecture"
+              },
+              {
+                "name": "format",
+                "value": "markdown"
+              }
+            ]
+          }
+        }
+      },
+      "id": "69c702db-7240-4b30-a495-2b8cc7879f60",
+      "name": "Document Loader",
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1,
+      "position": [
+        944,
+        -160
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Подсчет результатов и логирование\nconst items = $input.all();\nconst totalChunks = items.length;\n\n// Получаем информацию из первого элемента\nconst firstItem = items[0]?.json || {};\n\nconst result = {\n  success: true,\n  message: '✅ Документ успешно добавлен в векторное хранилище',\n  statistics: {\n    total_chunks: totalChunks,\n    source: firstItem.metadata?.source || 'unknown',\n    indexed_at: new Date().toISOString(),\n    embedding_model: 'text-embedding-multilingual-e5-small',\n    chunk_size: 800,\n    chunk_overlap: 200\n  }\n};\n\n// Вывод в лог\nconsole.log('='.repeat(60));\nconsole.log('✅ ИНДЕКСАЦИЯ ЗАВЕРШЕНА');\nconsole.log('='.repeat(60));\nconsole.log(`Чанков создано: ${totalChunks}`);\nconsole.log(`Источник: ${result.statistics.source}`);\nconsole.log(`Модель: ${result.statistics.embedding_model}`);\nconsole.log(`Время: ${result.statistics.indexed_at}`);\nconsole.log('='.repeat(60));\n\nreturn [{ json: result }];"
+      },
+      "id": "9857f8fc-5f23-4961-98c1-2df4fe441964",
+      "name": "Log Results",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1136,
+        -336
+      ],
+      "notesInFlow": true,
+      "notes": "Логирование результатов индексации"
+    },
+    {
+      "parameters": {
+        "mode": "insert",
+        "tableName": "lecture_chunks",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStorePGVector",
+      "typeVersion": 1.3,
+      "position": [
+        784,
+        -336
+      ],
+      "id": "5eec6756-2f8a-4839-9545-c02dc769b944",
+      "name": "Postgres PGVector Store",
+      "credentials": {
+        "postgres": {
+          "id": "lFIXW6himbJkTWHJ",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "text",
+        "binaryPropertyName": "=data",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [
+        544,
+        -336
+      ],
+      "id": "29f2bdf8-a6aa-40eb-874d-c59627a531b1",
+      "name": "Extract from File"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "Extract from File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract from File": {
+      "main": [
+        [
+          {
+            "node": "Postgres PGVector Store",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Document Loader": {
+      "ai_document": [
+        [
+          {
+            "node": "Postgres PGVector Store",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Recursive Text Splitter": {
+      "ai_textSplitter": [
+        [
+          {
+            "node": "Document Loader",
+            "type": "ai_textSplitter",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Embeddings": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Postgres PGVector Store",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres PGVector Store": {
+      "main": [
+        [
+          {
+            "node": "Log Results",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "a216b476-e7b6-47d8-80e4-a68d21c89ee0",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "ab7e7322f1f333bbe900bc0500389672242da86983f461f344793e261fb98977"
+  },
+  "id": "Hz5jT5Lml8RCjSdz",
+  "tags": [
+    {
+      "name": "lection7",
+      "id": "79uLJy0M1GKAaw3i",
+      "createdAt": "2025-10-27T09:24:04.853Z",
+      "updatedAt": "2025-10-27T09:24:04.853Z"
+    }
+  ]
+}

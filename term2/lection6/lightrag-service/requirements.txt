@@ -1,0 +1,12 @@
+fastapi==0.109.0
+uvicorn[standard]==0.27.0
+pydantic==2.5.3
+pydantic-settings==2.1.0
+httpx==0.26.0
+numpy==1.26.3
+openai==1.12.0
+python-multipart==0.0.6
+lightrag-hku==1.4.9.4
+networkx==3.2.1
+aiofiles==23.2.1
+

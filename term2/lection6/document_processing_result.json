@@ -1,0 +1,306 @@
+{
+  "chunks": [
+    {
+      "content": "<!-- image -->\n\n| **«УТВЕРЖДАЮ»**  «\\_\\_\\_»\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_20\\_\\_г.   |    | **«УТВЕРЖДАЮ»**  «\\_\\_\\_»\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_20\\_\\_г.   |\n|-------------------------------------------------------------------|----|-------------------------------------------------------------------|\n\nИнструкция пользователя\n\nФСБУ 25 «Аренда»\n",
+      "metadata": {
+        "category": "FSBU",
+        "chunk_index": 0,
+        "chunk_tokens": 124,
+        "document_id": "45a5c90b-dc48-417e-ab61-2c2fa9ced880",
+        "format": "docx",
+        "has_pictures": true,
+        "pages": 0,
+        "pictures_count": 42,
+        "source": "test",
+        "source_filename": "25_.docx",
+        "total_chunks": 156
+      }
+    },
+    {
+      "content": "|-------------------------------------------------------------------|----|-------------------------------------------------------------------|\n\nИнструкция пользователя\n\nФСБУ 25 «Аренда»\n\nв КИС 1С УПП\n\nМосква\n\n2022\n\n**Лист согласования**\n\n| Фамилия И. О.   | Должность   | Подпись   | Дата   |\n|-----------------|-------------|-----------|--------|\n|                 |             |           |        |\n|                 |             |           |        |\n|                 |             |           |        |\n|                 |             |           |        |",
+      "metadata": {
+        "category": "FSBU",
+        "chunk_index": 1,
+        "chunk_tokens": 124,
+        "document_id": "45a5c90b-dc48-417e-ab61-2c2fa9ced880",
+        "format": "docx",
+        "has_pictures": true,
+        "pages": 0,
+        "pictures_count": 42,
+        "source": "test",
+        "source_filename": "25_.docx",
+        "total_chunks": 156
+      }
+    },
+    {
+      "content": "|                 |             |           |        |\n|                 |             |           |        |\n|                 |             |           |        |\n|                 |             |           |        |\n\n**Лист изменений**\n\n| Дата       | Версия   | Краткое описание изменений                                          | ФИО           |\n|------------|----------|---------------------------------------------------------------------|---------------|",
+      "metadata": {
+        "category": "FSBU",
+        "chunk_index": 2,
+        "chunk_tokens": 78,
+        "document_id": "45a5c90b-dc48-417e-ab61-2c2fa9ced880",
+        "format": "docx",
+        "has_pictures": true,
+        "pages": 0,
+        "pictures_count": 42,
+        "source": "test",
+        "source_filename": "25_.docx",
+        "total_chunks": 156
+      }
+    },
+    {
+      "content": "|------------|----------|---------------------------------------------------------------------|---------------|\n| 23.03.23   |          | Внесение изменений в п.п. 3,6 в связи с реализацией ЗНИ CHG00075338 | Юрданова В.В. |\n| 01.06.23   |          | Внесены изменения в п. 6 в связи с реализацией ЗНИ CHG00075339      | Юрданова В.В. |",
+      "metadata": {
+        "category": "FSBU",
+        "chunk_index": 3,
+        "chunk_tokens": 121,
+        "document_id": "45a5c90b-dc48-417e-ab61-2c2fa9ced880",
+        "format": "docx",
+        "has_pictures": true,
+        "pages": 0,
+        "pictures_count": 42,
+        "source": "test",
+        "source_filename": "25_.docx",
+        "total_chunks": 156
+      }
+    },
+    {
+      "content": "| 29.07.2024 | 4        | Внесены изменения в п.6 в связи с реализацией ЗНИ CHG00094804       | Нейфельд Е.В. |\n|            |          |                                                                     |               |\n|            |          |                                                                     |               |\n\n**Оглавление**\n\n[Глоссарий\t5](.)\n\n[Общие сведения\t7](.)\n\n[Назначение инструкции\t7](.)\n\n[Владелец\t7](.)\n",
+      "metadata": {
+        "category": "FSBU",
+        "chunk_index": 4,
+        "chunk_tokens": 120,
+        "document_id": "45a5c90b-dc48-417e-ab61-2c2fa9ced880",
+        "format": "docx",
+        "has_pictures": true,
+        "pages": 0,
+        "pictures_count": 42,
+        "source": "test",
+        "source_filename": "25_.docx",
+        "total_chunks": 156
+      }
+    }
+  ],
+  "chunks_count": 156,
+  "chunks_preview_only": true,
+  "document_id": "45a5c90b-dc48-417e-ab61-2c2fa9ced880",
+  "filename": "25_.docx",
+  "metadata": {
+    "filename": "25_.docx",
+    "format": "docx",
+    "pages": 0
+  },
+  "pictures": [
+    {
+      "annotations": [],
+      "caption": "",
+      "self_ref": "#/pictures/0"
+    },
+    {
+      "annotations": [],
+      "caption": "",
+      "self_ref": "#/pictures/1"
+    },
+    {
+      "annotations": [],
+      "caption": "",
+      "self_ref": "#/pictures/2"
+    },
+    {
+      "annotations": [],
+      "caption": "",
+      "self_ref": "#/pictures/3"
+    },
+    {
+      "annotations": [],
+      "caption": "",
+      "self_ref": "#/pictures/4"
+    },
+    {
+      "annotations": [],
+      "caption": "",
+      "self_ref": "#/pictures/5"
+    },
+    {
+      "annotations": [],
+      "caption": "",
+      "self_ref": "#/pictures/6"
+    },
+    {
+      "annotations": [],
+      "caption": "",
+      "self_ref": "#/pictures/7"
+    },
+    {
+      "annotations": [],
+      "caption": "",
+      "self_ref": "#/pictures/8"
+    },
+    {
+      "annotations": [],
+      "caption": "",
+      "self_ref": "#/pictures/9"
+    },
+    {
+      "annotations": [],
+      "caption": "",
+      "self_ref": "#/pictures/10"
+    },
+    {
+      "annotations": [],
+      "caption": "",
+      "self_ref": "#/pictures/11"
+    },
+    {
+      "annotations": [],
+      "caption": "",
+      "self_ref": "#/pictures/12"
+    },
+    {
+      "annotations": [],
+      "caption": "",
+      "self_ref": "#/pictures/13"
+    },
+    {
+      "annotations": [],
+      "caption": "",
+      "self_ref": "#/pictures/14"
+    },
+    {
+      "annotations": [],
+      "caption": "",
+      "self_ref": "#/pictures/15"
+    },
+    {
+      "annotations": [],
+      "caption": "",
+      "self_ref": "#/pictures/16"
+    },
+    {
+      "annotations": [],
+      "caption": "",
+      "self_ref": "#/pictures/17"
+    },
+    {
+      "annotations": [],
+      "caption": "",
+      "self_ref": "#/pictures/18"
+    },
+    {
+      "annotations": [],
+      "caption": "",
+      "self_ref": "#/pictures/19"
+    },
+    {
+      "annotations": [],
+      "caption": "",
+      "self_ref": "#/pictures/20"
+    },
+    {
+      "annotations": [],
+      "caption": "",
+      "self_ref": "#/pictures/21"
+    },
+    {
+      "annotations": [],
+      "caption": "",
+      "self_ref": "#/pictures/22"
+    },
+    {
+      "annotations": [],
+      "caption": "",
+      "self_ref": "#/pictures/23"
+    },
+    {
+      "annotations": [],
+      "caption": "",
+      "self_ref": "#/pictures/24"
+    },
+    {
+      "annotations": [],
+      "caption": "",
+      "self_ref": "#/pictures/25"
+    },
+    {
+      "annotations": [],
+      "caption": "",
+      "self_ref": "#/pictures/26"
+    },
+    {
+      "annotations": [],
+      "caption": "",
+      "self_ref": "#/pictures/27"
+    },
+    {
+      "annotations": [],
+      "caption": "",
+      "self_ref": "#/pictures/28"
+    },
+    {
+      "annotations": [],
+      "caption": "",
+      "self_ref": "#/pictures/29"
+    },
+    {
+      "annotations": [],
+      "caption": "",
+      "self_ref": "#/pictures/30"
+    },
+    {
+      "annotations": [],
+      "caption": "",
+      "self_ref": "#/pictures/31"
+    },
+    {
+      "annotations": [],
+      "caption": "",
+      "self_ref": "#/pictures/32"
+    },
+    {
+      "annotations": [],
+      "caption": "",
+      "self_ref": "#/pictures/33"
+    },
+    {
+      "annotations": [],
+      "caption": "",
+      "self_ref": "#/pictures/34"
+    },
+    {
+      "annotations": [],
+      "caption": "",
+      "self_ref": "#/pictures/35"
+    },
+    {
+      "annotations": [],
+      "caption": "",
+      "self_ref": "#/pictures/36"
+    },
+    {
+      "annotations": [],
+      "caption": "",
+      "self_ref": "#/pictures/37"
+    },
+    {
+      "annotations": [],
+      "caption": "",
+      "self_ref": "#/pictures/38"
+    },
+    {
+      "annotations": [],
+      "caption": "",
+      "self_ref": "#/pictures/39"
+    },
+    {
+      "annotations": [],
+      "caption": "",
+      "self_ref": "#/pictures/40"
+    },
+    {
+      "annotations": [],
+      "caption": "",
+      "self_ref": "#/pictures/41"
+    }
+  ],
+  "success": true
+}

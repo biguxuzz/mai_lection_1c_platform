@@ -1,0 +1,12 @@
+flask==3.0.0
+werkzeug==3.0.1
+docling>=2.21.0
+python-dotenv==1.0.0
+requests>=2.31.0
+gunicorn==21.2.0
+tiktoken>=0.7.0
+pandas>=2.1.4
+numpy<2.0
+python-magic>=0.4.27
+pillow>=10.2.0
+

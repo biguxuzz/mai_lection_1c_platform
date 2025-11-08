@@ -1,0 +1,109 @@
+{
+  "name": "Lection 7 - Vector Search Query",
+  "nodes": [
+    {
+      "parameters": {
+        "model": "text-embedding-multilingual-e5-small",
+        "options": {
+          "baseURL": "http://host.docker.internal:1234/v1"
+        }
+      },
+      "id": "d2ae8c32-fd12-4531-8fb1-9d09ce96679c",
+      "name": "OpenAI Embeddings1",
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1,
+      "position": [
+        144,
+        624
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "aDOkrShCG8ISkFIC",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {
+          "responseMode": "lastNode"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -384,
+        384
+      ],
+      "id": "4cab6c75-ccf9-439c-afe8-87fc-8063e8e6",
+      "name": "When chat message received",
+      "webhookId": "a399dee6-1c34-407a-b475-cde675bb30bf"
+    },
+    {
+      "parameters": {
+        "mode": "retrieve",
+        "prompt": "={{ $json.chatInput || $json.query }}",
+        "topK": "={{ $json.top_k || 5 }}",
+        "tableName": "lecture_chunks",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStorePGVector",
+      "typeVersion": 1.3,
+      "position": [
+        304,
+        384
+      ],
+      "id": "a2713864-536b-49bd-98fc-0a6b846a42c3",
+      "name": "Postgres PGVector Store1",
+      "credentials": {
+        "postgres": {
+          "id": "lFIXW6himbJkTWHJ",
+          "name": "Postgres account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "OpenAI Embeddings1": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Postgres PGVector Store1",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "Postgres PGVector Store1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "e4785bb5-5be9-4e9f-9a49-3fd5da34e58c",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "ab7e7322f1f333bbe900bc0500389672242da86983f461f344793e261fb98977"
+  },
+  "id": "Hz5jT5Lml8RCjSdz",
+  "tags": [
+    {
+      "name": "lection7",
+      "id": "79uLJy0M1GKAaw3i",
+      "createdAt": "2025-10-27T09:24:04.853Z",
+      "updatedAt": "2025-10-27T09:24:04.853Z"
+    }
+  ]
+}

@@ -1,0 +1,180 @@
+{
+  "name": "Docling Document Processing",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "docling-process",
+        "responseMode": "responseNode",
+        "options": {
+          "allowedOrigins": "*"
+        }
+      },
+      "id": "webhook-docling",
+      "name": "Webhook Document Upload",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1.1,
+      "position": [250, 300],
+      "webhookId": "docling-process-webhook"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Валидация входных данных для Docling\nconst items = $input.all();\nconst results = [];\n\nfor (const item of items) {\n  const body = item.json.body || item.json;\n  \n  // Проверка наличия файла или URL\n  if (!body.file && !body.fileUrl && !item.binary) {\n    throw new Error('File, fileUrl or binary data is required');\n  }\n  \n  // Параметры обработки\n  const enableImageDescription = body.enable_image_description !== false;\n  const sendToRag = body.send_to_rag !== false;\n  \n  // Метаданные\n  const metadata = body.metadata || {};\n  metadata.uploaded_at = new Date().toISOString();\n  metadata.workflow = 'n8n-docling-process';\n  \n  results.push({\n    json: {\n      enable_image_description: enableImageDescription,\n      send_to_rag: sendToRag,\n      metadata: JSON.stringify(metadata),\n      filename: body.filename || 'document'\n    },\n    binary: item.binary || {}\n  });\n}\n\nreturn results;"
+      },
+      "id": "code-validate-docling",
+      "name": "Validate Input",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://docling-service:8001/process",
+        "authentication": "none",
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "enable_image_description",
+              "value": "={{ $json.enable_image_description }}"
+            },
+            {
+              "name": "send_to_rag",
+              "value": "={{ $json.send_to_rag }}"
+            },
+            {
+              "name": "metadata",
+              "value": "={{ $json.metadata }}"
+            }
+          ]
+        },
+        "sendBinaryData": true,
+        "binaryPropertyName": "data",
+        "options": {
+          "timeout": 300000
+        }
+      },
+      "id": "http-docling-process",
+      "name": "Process with Docling",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [650, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Обработка результата от Docling Service\nconst items = $input.all();\nconst results = [];\n\nfor (const item of items) {\n  const response = item.json;\n  \n  if (!response.success) {\n    throw new Error(`Docling processing failed: ${response.error}`);\n  }\n  \n  // Формирование ответа\n  const result = {\n    success: true,\n    document_id: response.document_id,\n    filename: response.filename,\n    chunks_count: response.chunks_count,\n    has_pictures: response.metadata?.pictures_count > 0,\n    pictures_count: response.metadata?.pictures_count || 0,\n    pages: response.metadata?.pages,\n    format: response.metadata?.format,\n    message: 'Document processed successfully'\n  };\n  \n  // Если были отправлены в RAG, добавляем информацию\n  if (response.rag_ingestion) {\n    result.rag_status = {\n      total_chunks: response.rag_ingestion.total_chunks,\n      successful: response.rag_ingestion.successful,\n      failed: response.rag_ingestion.failed\n    };\n  }\n  \n  // Добавляем preview первых чанков\n  if (response.chunks && response.chunks.length > 0) {\n    result.chunks_preview = response.chunks.slice(0, 2).map(chunk => ({\n      content: chunk.content.substring(0, 200) + '...',\n      chunk_index: chunk.metadata.chunk_index\n    }));\n  }\n  \n  results.push({ json: result });\n}\n\nreturn results;"
+      },
+      "id": "code-format-response",
+      "name": "Format Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [850, 300]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ $json }}",
+        "options": {
+          "responseCode": 200,
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          }
+        }
+      },
+      "id": "respond-docling",
+      "name": "Respond Success",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1050, 300]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { success: false, error: $json.error || 'Unknown error', message: 'Document processing failed' } }}",
+        "options": {
+          "responseCode": 500,
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          }
+        }
+      },
+      "id": "respond-error",
+      "name": "Respond Error",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [850, 500]
+    }
+  ],
+  "connections": {
+    "Webhook Document Upload": {
+      "main": [
+        [
+          {
+            "node": "Validate Input",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate Input": {
+      "main": [
+        [
+          {
+            "node": "Process with Docling",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Process with Docling": {
+      "main": [
+        [
+          {
+            "node": "Format Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Response": {
+      "main": [
+        [
+          {
+            "node": "Respond Success",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "saveExecutionProgress": true,
+    "saveManualExecutions": true
+  },
+  "versionId": "1",
+  "id": "3",
+  "meta": {
+    "instanceId": "lection6-docling-process"
+  },
+  "tags": []
+}
+
+
