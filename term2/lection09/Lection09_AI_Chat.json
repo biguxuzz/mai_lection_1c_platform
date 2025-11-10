@@ -1,0 +1,96 @@
+{
+  "name": "Lection 9 AI Chat",
+  "nodes": [
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json['Должность'] }}",
+        "options": {
+          "systemMessage": "=Ты эксперт по кинематографу 1990х годов"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        -64,
+        -80
+      ],
+      "id": "323ce167-be49-45b3-8e34-fd68400ec412",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "GigaChat/GigaChat-2-Max",
+          "mode": "list",
+          "cachedResultName": "GigaChat/GigaChat-2-Max"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -208,
+        128
+      ],
+      "id": "c0944225-e923-4cc7-8ef9-40de37f940a2",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "eZ7vogWOhOeXsYCm",
+          "name": "Cloud test"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "inputSource": "passthrough"
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -304,
+        -80
+      ],
+      "id": "6094cd95-a78c-4333-9677-50719c97269e",
+      "name": "When Executed by Another Workflow"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "9483cc3d-5b19-4a81-9d11-76e4a2ad1d4b",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "ab7e7322f1f333bbe900bc0500389672242da86983f461f344793e261fb98977"
+  },
+  "id": "HUl2Kwi1h4T7KcP8",
+  "tags": []
+}

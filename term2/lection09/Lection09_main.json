@@ -1,0 +1,1008 @@
+{
+  "name": "Lection 9 main",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "#### 1.1 Что такое N8N \n\n**N8N** — это платформа для автоматизации рабочих процессов, предназначенная для замены рутинных и повторяющихся задач.\n\n**Ключевые характеристики:**\n- **Low-code/No-code инструмент** — для создания рабочих процессов не требуется программирование (или требуется минимальное)\n- Возможность программирования с помощью нейросетей (ChatGPT, Claude)\n- Наличие продвинутых функций для опытных разработчиков\n- Возможность встраивания собственного кода при необходимости\n\n**Основная цель N8N:**\n- Оптимизация бизнес-процессов или личных задач\n- Автоматизация с помощью ИИ\n- Уменьшение количества ошибок\n- Экономия времени и денег\n",
+        "height": 448,
+        "width": 640
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -592,
+        -320
+      ],
+      "typeVersion": 1,
+      "id": "62b53709-9dad-4dfe-83c3-1ccb546fe64c",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "#### 1.2 Ключевые понятия\n\n**Workflow (Рабочий процесс):**\n- Набор инструментов, которые N8N выполняет для автоматизации задач\n- Можно давать любое название\n- Состоит из узлов (nodes)\n\n**Узлы (Nodes):**\n- Каждый элемент в workflow — это узел\n- Различные типы узлов для разных задач\n\n**Триггер (Trigger):**\n- То, что запускает рабочий процесс\n- Типы триггеров:\n  - Из сторонних сервисов (Telegram, Gmail и др.)\n  - На заполнение форм\n  - По расписанию (cron)\n  - Test Workflow (запуск вручную для тестирования)\n\n**Action Nodes:**\n- Все узлы, которые идут после триггера\n- Выполняют действия в рабочем процессе\n\n**Execution (Выполнение):**\n- Каждый запуск рабочего процесса называется execution\n- Можно отслеживать в разделе Executions\n- Позволяет видеть ошибки и отлаживать процесс",
+        "height": 608,
+        "width": 640
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -592,
+        160
+      ],
+      "typeVersion": 1,
+      "id": "06a99212-38fa-4307-9bb8-19f8041d0325",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "#### 2.1 Варианты развертывания\n\n**N8N — проект с открытым исходным кодом:**\n- Можно установить на свой компьютер (бесплатно)\n- Можно установить на сервер (бесплатно)\n- Официальная подписка на N8N Cloud\n\n**Рекомендации:**\n- **Не рекомендуется** устанавливать на локальный компьютер (боты не работают при выключенном компьютере)\n- **Рекомендуется:** сервер или официальная подписка\n",
+        "height": 272,
+        "width": 640
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -592,
+        800
+      ],
+      "typeVersion": 1,
+      "id": "6940606f-9c65-48f5-baa3-6d23ef51220c",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "content": "#### 2.2 Самостоятельное размещение на сервере \n\n**Плюсы самостоятельного размещения:**\n- Дешево (пример: 22 рубля в день, 660 рублей в месяц)\n- Конфиденциальность данных\n- Полный контроль над системой\n\n**Минусы самостоятельного размещения:**\n- Сложнее интеграция с сервисами (например, Google через OAuth-2)\n- Нужно самостоятельно обеспечивать безопасность\n- Нет встроенного ассистента\n- Нет расширенной поддержки\n- Долгое развертывание (нужен домен, ожидание активации)\n- Сложнее обновления (через консоль сервера)",
+        "height": 336,
+        "width": 640
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -592,
+        1120
+      ],
+      "typeVersion": 1,
+      "id": "88a7aa45-484e-4cef-9c58-e7ec8fbedb3d",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "content": "#### 2.3 Официальная подписка \n\n**Плюсы официальной подписки:**\n- Простая интеграция с сервисами (просто войти в аккаунт)\n- Встроенный ассистент с доступом к workflow\n- Расширенная поддержка\n- Быстрое развертывание\n- Простые обновления\n\n**Минусы:**\n- Стоимость: 24 евро/доллара в месяц\n- Данные хранятся на серверах N8N\n\n**Рекомендация для новичков:**\n- Если есть возможность — оформить подписку на начальном этапе\n- Это облегчит порог вхождения и снизит риск забросить программу\n- Подписку можно отменить в любой момент",
+        "height": 400,
+        "width": 640
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -592,
+        1520
+      ],
+      "typeVersion": 1,
+      "id": "aed42286-d108-48a2-9ca1-61f19dfcec1e",
+      "name": "Sticky Note4"
+    },
+    {
+      "parameters": {
+        "content": "#### 3.1 Настройка базового агента \n\n**Компоненты базового ИИ-агента:**\n\n1. **On Chat Message** — триггер для сообщений внутри интерфейса N8N\n2. **AI Agent** — узел для работы с ИИ\n3. **Chat Model** — выбор языковой модели (LLM)\n   - GPT-4.1 mini (оптимальный вариант по цене)\n   - GPT-4, DeepSeek, Claude, Grok, Gemini и др.\n\n**Настройка промпта:**\n- **Prompt** — то, что отправляется боту\n- **System Message** — кастомные инструкции или системный промпт\n  - Определяет поведение агента\n  - Описывает инструменты и роль агента\n  - Пример: \"Ты агент по созданию постов для телеграм-канала\"\n\n**Память (Memory):**\n- Без памяти агент не помнит контекст предыдущих сообщений\n- С памятью (например, Sample Memory, контекст 5) агент помнит последние N сообщений\n- Важно для поддержания диалога",
+        "height": 512,
+        "width": 640
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -592,
+        1968
+      ],
+      "typeVersion": 1,
+      "id": "af3df291-0b0f-4fc2-ac6b-eb2d428cdf8d",
+      "name": "Sticky Note5"
+    },
+    {
+      "parameters": {
+        "content": "#### 3.2 Вывод агента в Telegram \n\n**Интеграция с Telegram:**\n- Можно вывести базового ИИ-агента в Telegram\n- Использование Telegram триггера вместо On Chat Message\n- Это первое, что стоит сделать при освоении N8N\n",
+        "height": 176,
+        "width": 640
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -592,
+        2528
+      ],
+      "typeVersion": 1,
+      "id": "96c0d44b-cd84-4716-821e-6066a194c72e",
+      "name": "Sticky Note6"
+    },
+    {
+      "parameters": {
+        "content": "#### 4.1 N8N как программирование без кода\n\n**Концепция:**\n- N8N — это программирование без кода\n- Вы программируете через интерфейс (перетаскивание, нажатия)\n- Файл workflow записывается как JSON-код\n\n**Работа с JSON:**\n- Можно скачать workflow как JSON-файл\n- Можно импортировать workflow из JSON\n- Можно копировать весь проект (Command-C) и вставлять (Command-V)\n- JSON (JavaScript Object Notation) — формат для передачи данных между приложениями",
+        "height": 320,
+        "width": 640
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -592,
+        2752
+      ],
+      "typeVersion": 1,
+      "id": "00d3598f-8dab-407d-88d1-7e82213abfbd",
+      "name": "Sticky Note7"
+    },
+    {
+      "parameters": {
+        "content": "#### 4.2 Expressions (Динамические выражения) \n\n**Expressions:**\n- Динамические выражения, которые добавляют гибкости\n- Значение меняется в зависимости от входных данных\n- Доступны везде, где можно что-то ввести\n\n**Режимы:**\n- **Expression** — динамическое значение (по умолчанию)\n- **Fix** — фиксированное значение (отправляется ровно то, что написано)\n\n**Удобство работы:**\n- Кнопка для просмотра на большом экране (для больших промптов)\n- Показывает выражение и результат выражения\n\n**Типы данных:**\n- String (строка) — текст\n- Number (число) — числа\n- Boolean — логические значения (true/false)\n- Array (массив) — массив данных\n- Object (объект) — объект",
+        "height": 480,
+        "width": 640
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -592,
+        3120
+      ],
+      "typeVersion": 1,
+      "id": "d832b46a-1fe5-4e41-a74a-a10de4168144",
+      "name": "Sticky Note8"
+    },
+    {
+      "parameters": {
+        "content": "#### 5.1 Узел IF \n\n**Назначение:**\n- Выполняет условия в зависимости от истинности или ложности\n\n**Настройка:**\n- Выбор типа данных (string, number, boolean, array, object)\n- Выбор условий: exists, not exists, empty, not empty, contains, equal to, not equal to\n- Два выхода: true и false\n\n**Пример:**\n- Проверка равенства строки определенному значению\n- Опция \"ignore case\" — игнорирование регистра\n",
+        "height": 352,
+        "width": 640
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -592,
+        3648
+      ],
+      "typeVersion": 1,
+      "id": "6c95d3fe-321a-4d0b-b187-395e518be449",
+      "name": "Sticky Note9"
+    },
+    {
+      "parameters": {
+        "content": "#### 5.2 Узел SWITCH\n\n**Назначение:**\n- Направление по разным путям в зависимости от условия\n- Более продвинутый вариант IF\n\n**Особенности:**\n- Можно добавить множество routing rules (правил маршрутизации)\n- Можно переименовать выходы для удобства навигации\n- Опция \"ignore case\" доступна\n\n**Пример использования:**\n- Разные действия в зависимости от значения переменной\n- Визуальное обозначение путей (море, горы и т.д.)",
+        "height": 336,
+        "width": 640
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -592,
+        4064
+      ],
+      "typeVersion": 1,
+      "id": "bbbf0698-2394-49bc-82bc-80c0bfd75e95",
+      "name": "Sticky Note10"
+    },
+    {
+      "parameters": {
+        "content": "#### 5.3 Узел Filter \n\n**Назначение:**\n- Фильтрует данные, отсеивая ненужные\n\n**Принцип работы:**\n- Пропускает данные, соответствующие условию\n- Не пропускает данные, не соответствующие условию",
+        "height": 208,
+        "width": 640
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -592,
+        4448
+      ],
+      "typeVersion": 1,
+      "id": "1e994c39-8eda-4603-8a6e-aea4bd52a646",
+      "name": "Sticky Note11"
+    },
+    {
+      "parameters": {
+        "content": "#### 5.4 Узел Merge \n\n**Назначение:**\n- Объединяет данные из разных веток рабочего процесса в один поток\n\n**Режимы работы:**\n\n1. **Append** — просто объединяет все элементы\n   - 5 элементов + 5 элементов = 10 элементов\n   - Не учитывает совпадения\n\n2. **Keep Matches** — сохраняет только совпадающие значения\n   - Сравнивает по указанному полю (matching fields)\n   - Выводит только те, что есть в обеих таблицах\n\n3. **Keep Non Matches** — сохраняет только несовпадающие значения\n   - Выдает значения, которые есть только в одной таблице\n\n4. **Keep Everything** — сохраняет все, но без дубликатов\n   - Объединяет данные, но убирает дубликаты\n\n**Особенности:**\n- Можно подключить множество входов (2, 3, 5 и более)",
+        "height": 528,
+        "width": 640
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -592,
+        4688
+      ],
+      "typeVersion": 1,
+      "id": "0b28b1b0-f113-44ae-b643-ee380e2e11d1",
+      "name": "Sticky Note12"
+    },
+    {
+      "parameters": {
+        "content": "#### 5.5 Узел Split In Batches (Loop Over Items)\n\n**Назначение:**\n- Разбивает набор данных на порции (batches) для поэтапной обработки\n- Обрабатывает каждый item по отдельности\n\n**Настройка:**\n- Batch size — сколько элементов обрабатывать за раз (обычно 1)\n- При batch size = 1 каждый элемент обрабатывается отдельно\n\n**Применение:**\n- Когда нужно обработать каждый элемент массива отдельно\n- При парсинге больших объемов данных (500+ элементов)\n- Для преобразования данных каждого элемента\n\n**Важно:**\n- Без этого узла данные обрабатываются как массив\n- С узлом каждый элемент обрабатывается отдельно",
+        "height": 400,
+        "width": 640
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -592,
+        5248
+      ],
+      "typeVersion": 1,
+      "id": "89abc1fd-92a7-4f55-967a-2a52747987d6",
+      "name": "Sticky Note13"
+    },
+    {
+      "parameters": {
+        "content": "#### 5.6 Узел Wait \n\n**Назначение:**\n- Ожидание определенного времени перед продолжением выполнения\n\n**Настройки:**\n- Задержка в секундах, минутах, часах, днях\n- До определенного времени\n- В специальную дату/время\n\n**Применение:**\n- Задержки между запросами к API\n- Ожидание определенного времени",
+        "height": 304,
+        "width": 640
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -592,
+        5680
+      ],
+      "typeVersion": 1,
+      "id": "0edde14d-756b-4707-ad3b-f3b78609cfeb",
+      "name": "Sticky Note14"
+    },
+    {
+      "parameters": {
+        "content": "#### 5.7 Узел Set (Edit Fields) \n\n**Назначение:**\n- Преобразование данных\n- Изменение лейблов (этикеток) данных\n\n**Применение:**\n- Переименование полей\n- Изменение структуры данных\n- Один из самых полезных узлов",
+        "height": 240,
+        "width": 640
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -592,
+        6016
+      ],
+      "typeVersion": 1,
+      "id": "0b2946f8-39ae-4c1e-baf4-c4ff28b0aefc",
+      "name": "Sticky Note15"
+    },
+    {
+      "parameters": {
+        "content": "#### 5.8 Узел Aggregate \n\n**Назначение:**\n- Комбинация и объединение данных\n- Преобразование данных специальным образом\n\n**Применение:**\n- Создание единого поля из всех данных\n- Периодически используется в N8N",
+        "height": 224,
+        "width": 640
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -592,
+        6288
+      ],
+      "typeVersion": 1,
+      "id": "2e05bd57-c200-4b61-9244-be4863cad51b",
+      "name": "Sticky Note16"
+    },
+    {
+      "parameters": {
+        "content": "#### 5.9 Узел Sort \n\n**Назначение:**\n- Сортировка данных\n\n**Настройки:**\n- По возрастанию (ascending)\n- По убыванию (descending)\n- По любому полю\n- Опция random — случайная сортировка",
+        "height": 256,
+        "width": 640
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -592,
+        6560
+      ],
+      "typeVersion": 1,
+      "id": "03699812-3bd3-479d-aaf5-f55803d47bee",
+      "name": "Sticky Note17"
+    },
+    {
+      "parameters": {
+        "content": "#### 5.10 Узел Split Out \n\n**Назначение:**\n- Разъединение данных\n- Отделение определенных полей\n\n**Режимы:**\n- **Select Other Fields** — выбрать поля для вывода\n- **All Other Fields** — вывести все поля\n- Убирает лишние столбцы, оставляет только нужные",
+        "height": 240,
+        "width": 640
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -592,
+        6848
+      ],
+      "typeVersion": 1,
+      "id": "859c99ac-f799-494d-b808-038f87917d90",
+      "name": "Sticky Note18"
+    },
+    {
+      "parameters": {
+        "content": "#### 5.11 Узел Code \n\n**Назначение:**\n- Написание кода на JavaScript или Python\n- Для случаев, когда не хватает функционала N8N\n\n**Применение:**\n- Для опытных разработчиков\n- Для новичков не требуется на начальных этапах\n- Можно использовать AI-кодинг (vibe-кодинг) с помощью нейросетей",
+        "height": 240,
+        "width": 640
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -592,
+        7136
+      ],
+      "typeVersion": 1,
+      "id": "00651fec-0ed1-4f57-a40a-c465137f667b",
+      "name": "Sticky Note19"
+    },
+    {
+      "parameters": {
+        "content": "#### 5.12 Узел Execute Workflow (3 минуты)\n\n**Назначение:**\n- Вызов другого рабочего процесса из текущего\n\n**Применение:**\n- Разделение сложных процессов на модули\n- Создание армии ИИ-агентов\n- Вызов специализированных workflow как инструментов\n- Вместо нагромождения инструментов в одном агенте — разделение на маленьких агентов",
+        "height": 256,
+        "width": 640
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -592,
+        7424
+      ],
+      "typeVersion": 1,
+      "id": "4f76cb68-1a13-470f-872a-695d13b0108b",
+      "name": "Sticky Note20"
+    },
+    {
+      "parameters": {
+        "content": "#### 5.13 Узел Do Nothing (1 минута)\n\n**Назначение:**\n- Абсолютно бессмысленный узел\n- Не имеет параметров и ничего не делает\n\n**Применение:**\n- Эстетическое обозначение завершения рабочего процесса\n- Визуальное удовольствие",
+        "height": 224,
+        "width": 640
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -592,
+        7728
+      ],
+      "typeVersion": 1,
+      "id": "b704d33c-7676-4ed5-9c58-fdf52aff1dc4",
+      "name": "Sticky Note21"
+    },
+    {
+      "parameters": {
+        "content": "#### 6.1 HTTP Request (5 минут)\n\n**Назначение:**\n- Подключение к сервисам через API\n- Более 400 встроенных интеграций (Gmail, Twitter, Outlook и др.)\n\n**Принцип работы:**\n- Все встроенные инструменты — это HTTP-запросы, предварительно настроенные разработчиками N8N\n- Можно настроить HTTP-запрос вручную для любого сервиса с API\n\n**Пример:**\n- Вызов нейросети Perplexity для поиска в интернете\n- Настройка URL, авторизации (API ключ), данных запроса\n\n**Важно:**\n- API — это мост между N8N и сервисом\n- Если сервиса нет в списке — можно вызвать через HTTP-запрос",
+        "height": 400,
+        "width": 640
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -592,
+        8000
+      ],
+      "typeVersion": 1,
+      "id": "ddcabbe0-ca3f-4929-be14-e8247fc3808f",
+      "name": "Sticky Note22"
+    },
+    {
+      "parameters": {
+        "content": "#### 6.2 WebHook (5 минут)\n\n**Назначение:**\n- Триггеры для получения данных из внешних источников\n- Запуск рабочих процессов по событиям в режиме реального времени\n\n**Примеры:**\n- WebHook Telegram (на прием сообщения)\n- WebHook Gmail (на новое письмо)\n- WebHook Google Drive (на изменение файла)\n\n**Особенности:**\n- Разработчики N8N упростили задачу — можно просто выбрать сервис\n- Если сервиса нет — можно настроить WebHook вручную\n\n**Применение:**\n- Автоматизация на основе событий внешних сервисов",
+        "height": 384,
+        "width": 640
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -592,
+        8432
+      ],
+      "typeVersion": 1,
+      "id": "258f0ed6-d549-4f07-9082-afce4eb85c05",
+      "name": "Sticky Note23"
+    },
+    {
+      "parameters": {
+        "content": "#### 7.1 Механизм обработки ошибок\n\n**Назначение:**\n- Настройка выполнения других рабочих процессов при возникновении сбоев\n\n**Настройка:**\n- В Settings workflow выбрать Error Workflow\n- Указать рабочий процесс, который запускается при ошибке\n\n**Компоненты:**\n- **Error Trigger** — триггер, который активируется при ошибке в другом workflow\n- Можно настроить отправку уведомлений (в Telegram, на почту и т.д.)\n\n**Применение:**\n- Для готовых решений для компаний\n- Моментальное уведомление об ошибках\n- Отправка сообщений команде для исправления\n\n**Пример:**\n- Бот сломался → приходит сообщение в Telegram\n- Команда моментально получает уведомление и может исправить ошибку",
+        "height": 464,
+        "width": 640
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -592,
+        8848
+      ],
+      "typeVersion": 1,
+      "id": "61be0ebc-5427-4c46-8942-8f92dfa5764a",
+      "name": "Sticky Note24"
+    },
+    {
+      "parameters": {
+        "content": "#### 8.1 Simple Memory\n\n**Назначение:**\n- Простая память, которая сохраняет контекст\n- Без памяти агент воспринимает сообщения как разрозненные\n\n**Настройка:**\n- Указать количество сообщений для запоминания (например, 5)\n- Агент помнит последние N сообщений",
+        "height": 224,
+        "width": 640
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -592,
+        9344
+      ],
+      "typeVersion": 1,
+      "id": "82a46922-bf15-44b1-b946-f8b973ed0075",
+      "name": "Sticky Note25"
+    },
+    {
+      "parameters": {
+        "content": "#### 9.1 Официальные ресурсы\n\n**Документация:**\n- docs.n8n.io — официальная документация\n\n**Сообщество:**\n- community.n8n.io — активное сообщество\n- Задавание вопросов\n- Поиск шаблонов\n- Обмен шаблонами\n\n**Встроенный ассистент:**\n- Доступен в официальной подписке и пробной версии\n- Подвязан к документации и сообществу\n- Видит ваш workflow и может отвечать на вопросы",
+        "height": 352,
+        "width": 640
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -592,
+        9600
+      ],
+      "typeVersion": 1,
+      "id": "0c516a98-1bff-405f-8a50-04b2ab1652f2",
+      "name": "Sticky Note27"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.3,
+      "position": [
+        160,
+        256
+      ],
+      "id": "c22d61eb-68c1-48e9-8e08-0efc1f50af16",
+      "name": "On form submission",
+      "webhookId": "2741f3d8-9d03-4d74-8dcb-b71a76bfc2e5"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        176,
+        2144
+      ],
+      "id": "c5d9d8fb-9d59-4013-b46a-cbc195f9a921",
+      "name": "When chat message received",
+      "webhookId": "4ea7ceae-56ad-4d1f-baf1-dce9e775f8b1"
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {}
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        160,
+        432
+      ],
+      "id": "29cc08b7-b0c8-4c51-84b6-4901d31c9ef2",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        400,
+        352
+      ],
+      "id": "ddbc18d3-b41c-4e47-beb5-b1b9f2b87f89",
+      "name": "Convert to File"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "You are a helpful assistant"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        384,
+        2144
+      ],
+      "id": "96d309a9-a85b-4323-8c1a-8cf4e13cf08e",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "microsoft/phi-4-mini-reasoning",
+          "mode": "list",
+          "cachedResultName": "microsoft/phi-4-mini-reasoning"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        384,
+        2336
+      ],
+      "id": "39469f11-234d-49d0-86f2-e88bfb28151d",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "HHTodRzStxFc56Z7",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        480,
+        2336
+      ],
+      "id": "b1ba9b2b-44f2-4f1c-b5cf-0270b3887b2b",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chat",
+      "typeVersion": 1,
+      "position": [
+        736,
+        2144
+      ],
+      "id": "e7a6d8bf-7de7-432c-8285-3c5d704f6d36",
+      "name": "Respond to Chat"
+    },
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        160,
+        2560
+      ],
+      "id": "d30bef18-8bd4-4892-822e-15c07d286f1a",
+      "name": "Telegram Trigger",
+      "webhookId": "0d21feac-af61-4353-a83d-85b974fabd45"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "d89cdeec-27e1-4cf3-a0fb-1042517a9863",
+              "leftValue": "",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        320,
+        3760
+      ],
+      "id": "4d7ca5c2-06c7-4734-b760-a7258adf6cd3",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "mode": "expression"
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.3,
+      "position": [
+        336,
+        4128
+      ],
+      "id": "da543438-0934-4471-8473-419a545d2e0c",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "41899d06-9811-43dd-a91e-230f94ad02c2",
+              "leftValue": "",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        336,
+        4496
+      ],
+      "id": "7b287004-ac5b-4ace-98ef-949c4ebbbaec",
+      "name": "Filter"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        368,
+        4848
+      ],
+      "id": "4d76fbd1-8da2-4a77-baec-b65e87a2b94c",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        368,
+        5312
+      ],
+      "id": "c54bce17-8383-4ccc-9774-41eee0d0e1c2",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "name": "Replace Me",
+      "typeVersion": 1,
+      "position": [
+        544,
+        5440
+      ],
+      "id": "a298f794-7c72-4311-b035-ddcfe4f9c78c"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        336,
+        5760
+      ],
+      "id": "5ed6f922-6aaa-4911-b390-1d1f4a1ce29e",
+      "name": "Wait",
+      "webhookId": "93f5abfa-8a95-47fc-8565-fe397566984a"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        352,
+        6064
+      ],
+      "id": "643b368c-4498-41dd-b71b-dac19fbf6604",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "fieldsToAggregate": {
+          "fieldToAggregate": [
+            {}
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        368,
+        6336
+      ],
+      "id": "ec99f0d1-ad79-49ad-b9e7-cd112147b3c7",
+      "name": "Aggregate"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.sort",
+      "typeVersion": 1,
+      "position": [
+        384,
+        6640
+      ],
+      "id": "c989eb10-13ce-4e0b-a291-b39c96e03ce6",
+      "name": "Sort"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        384,
+        6928
+      ],
+      "id": "77e9bbd9-8f6a-474d-b9cd-60e773385bf8",
+      "name": "Split Out"
+    },
+    {
+      "parameters": {
+        "language": "python",
+        "pythonCode": "# Loop over input items and add a new field called 'myNewField' to the JSON of each one\nfor item in _input.all():\n  item.json.myNewField = 1\nreturn _input.all()"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        384,
+        7184
+      ],
+      "id": "419028c6-e106-4041-a709-43fb92718bbe",
+      "name": "Code in Python (Beta)"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        384,
+        7488
+      ],
+      "id": "dcb7c4e3-3757-4c19-8199-25f101104b38",
+      "name": "Execute Workflow"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        384,
+        7776
+      ],
+      "id": "66465db9-f453-454e-8222-b33ad2375030",
+      "name": "No Operation, do nothing"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        384,
+        8128
+      ],
+      "id": "f3a9017b-3e65-419b-8f8b-fa5670f8c61a",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "path": "ac60ebbb-2473-4939-9138-574d39d12b82",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        416,
+        8528
+      ],
+      "id": "e5d30546-eac6-41fa-b795-e45ad7f46163",
+      "name": "Webhook",
+      "webhookId": "ac60ebbb-2473-4939-9138-574d39d12b82"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "3b09b979-b32d-4686-9e3a-5bf87e5fd3bc",
+              "name": "",
+              "value": false,
+              "type": "boolean"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        256,
+        3248
+      ],
+      "id": "95536023-8b8e-4822-9303-a8ce43e424f0",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.errorTrigger",
+      "typeVersion": 1,
+      "position": [
+        272,
+        8976
+      ],
+      "id": "a3e9364b-8420-432c-845f-3d026b95f949",
+      "name": "Error Trigger"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        176,
+        -176
+      ],
+      "id": "a564bebd-8c4a-47b4-8145-cd8723f5fd5a",
+      "name": "When Executed by Another Workflow"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Convert to File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "Convert to File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Respond to Chat",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        []
+      ]
+    },
+    "Switch": {
+      "main": [
+        []
+      ]
+    },
+    "Filter": {
+      "main": [
+        []
+      ]
+    },
+    "Merge": {
+      "main": [
+        []
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Replace Me",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Replace Me": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        []
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        []
+      ]
+    },
+    "Aggregate": {
+      "main": [
+        []
+      ]
+    },
+    "Sort": {
+      "main": [
+        []
+      ]
+    },
+    "Split Out": {
+      "main": [
+        []
+      ]
+    },
+    "Execute Workflow": {
+      "main": [
+        []
+      ]
+    },
+    "No Operation, do nothing": {
+      "main": [
+        []
+      ]
+    },
+    "When Executed by Another Workflow": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "beb85f04-5996-4528-9ee0-9281133fde82",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "ab7e7322f1f333bbe900bc0500389672242da86983f461f344793e261fb98977"
+  },
+  "id": "qZ6iRogjfsGOscV7",
+  "tags": []
+}

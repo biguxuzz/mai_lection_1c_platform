@@ -1,0 +1,600 @@
+{
+  "name": "Lection 9 - nodes",
+  "nodes": [
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": false,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "d89cdeec-27e1-4cf3-a0fb-1042517a9863",
+              "leftValue": "={{ $json.test }}",
+              "rightValue": "not",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {
+          "ignoreCase": true
+        }
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -832,
+        -128
+      ],
+      "id": "648a52b3-ee2a-4227-bdb3-eba203b993b1",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "mode": "expression"
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.3,
+      "position": [
+        -832,
+        32
+      ],
+      "id": "03616c4c-ee72-4b10-95ed-581e7e3b91fb",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "41899d06-9811-43dd-a91e-230f94ad02c2",
+              "leftValue": "",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        -832,
+        288
+      ],
+      "id": "0dd16820-b87d-4664-b32c-97ded3118dd4",
+      "name": "Filter"
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "fieldsToMatchString": "['Кандидат']",
+        "joinMode": "enrichInput1",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        -832,
+        448
+      ],
+      "id": "f829d53f-7890-45cb-8e87-21dbc2f9e12f",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        -752,
+        656
+      ],
+      "id": "6f855c4b-8a44-477f-b415-93157f696f08",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        -192,
+        848
+      ],
+      "id": "742da98f-7c10-4ad9-813b-cdc38ece5c9e",
+      "name": "Wait",
+      "webhookId": "93f5abfa-8a95-47fc-8565-fe397566984a"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -448,
+        240
+      ],
+      "id": "582f245a-834f-426b-aeaf-7366d58577d3",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        -256,
+        -112
+      ],
+      "id": "f092dbe7-5a8c-4329-9838-a82972494b56",
+      "name": "Aggregate"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.sort",
+      "typeVersion": 1,
+      "position": [
+        -192,
+        32
+      ],
+      "id": "8ae11da7-750f-4ad1-947f-2952cccbc88a",
+      "name": "Sort"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        -192,
+        224
+      ],
+      "id": "669109fa-0c81-4811-bea2-66555ca86a69",
+      "name": "Split Out"
+    },
+    {
+      "parameters": {
+        "language": "python",
+        "pythonCode": "# Loop over input items and add a new field called 'myNewField' to the JSON of each one\nfor item in _input.all():\n  item.json.myNewField = 1\nreturn _input.all()"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -176,
+        416
+      ],
+      "id": "ae606e59-ba57-4bde-94f6-add4f40e7e16",
+      "name": "Code in Python (Beta)"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        -176,
+        640
+      ],
+      "id": "4769c3e9-a212-4fd1-a5c6-0cd4f9175947",
+      "name": "Execute Workflow"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        352,
+        -48
+      ],
+      "id": "3ac9c6a8-6b47-465f-b4c7-8ea3b4a95abe",
+      "name": "No Operation, do nothing"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -1152,
+        -112
+      ],
+      "id": "d7ec0993-d3e4-4f1c-9487-2cf094ed9be1",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "18Xmzc9-rzz9lr6n3Xr6yHwKfeaRfJ8_q9tsZhxySesM",
+          "mode": "list",
+          "cachedResultName": "Кандидаты1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/18Xmzc9-rzz9lr6n3Xr6yHwKfeaRfJ8_q9tsZhxySesM/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1405439774,
+          "mode": "list",
+          "cachedResultName": "Лист2",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/18Xmzc9-rzz9lr6n3Xr6yHwKfeaRfJ8_q9tsZhxySesM/edit#gid=1405439774"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -1168,
+        336
+      ],
+      "id": "25cd4c4e-e0d4-456c-8719-41ae11a366d5",
+      "name": "Get row(s) in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "sugFKpQWq5m8UZqK",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1doT__mW8gsCuVr5MWrPJwnOdmVS78tSIwRNG_eg7x3g",
+          "mode": "list",
+          "cachedResultName": "Кандидаты2",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1doT__mW8gsCuVr5MWrPJwnOdmVS78tSIwRNG_eg7x3g/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1405439774,
+          "mode": "list",
+          "cachedResultName": "Лист2",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1doT__mW8gsCuVr5MWrPJwnOdmVS78tSIwRNG_eg7x3g/edit#gid=1405439774"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -1168,
+        512
+      ],
+      "id": "b68e8100-9a32-47f1-b1ac-8db5f9676108",
+      "name": "Get row(s) in sheet1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "sugFKpQWq5m8UZqK",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "9a4ba58f-b801-44b6-8d86-d08727ce9ec5",
+              "name": "Почта",
+              "value": "={{ $json['Кандидат'] }}",
+              "type": "string"
+            },
+            {
+              "id": "5b1b9a08-ee84-417f-b034-1f675ebc4883",
+              "name": "Должность",
+              "value": "={{ $json['Роль'] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -544,
+        752
+      ],
+      "id": "4a7f7b1b-2006-46f1-8a98-398f7fc43a6e",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1aDmmwDTs4K_9T2sW5LKvTyBVn0ttJK4S_jyxDQTHpGQ",
+          "mode": "list",
+          "cachedResultName": "Кандидаты_все_test",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1aDmmwDTs4K_9T2sW5LKvTyBVn0ttJK4S_jyxDQTHpGQ/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1634534797,
+          "mode": "list",
+          "cachedResultName": "Лист2",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1aDmmwDTs4K_9T2sW5LKvTyBVn0ttJK4S_jyxDQTHpGQ/edit#gid=1634534797"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Почта": "={{ $json['Почта'] }}",
+            "Должность": "={{ $json['Должность'] }}"
+          },
+          "matchingColumns": [
+            "Почта"
+          ],
+          "schema": [
+            {
+              "id": "Почта",
+              "displayName": "Почта",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Должность",
+              "displayName": "Должность",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Столбец 3",
+              "displayName": "Столбец 3",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Столбец 4",
+              "displayName": "Столбец 4",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Столбец 5",
+              "displayName": "Столбец 5",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Столбец 6",
+              "displayName": "Столбец 6",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "data",
+              "displayName": "data",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -544,
+        608
+      ],
+      "id": "d4b36d48-60e9-411b-92dc-1790653545a8",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "sugFKpQWq5m8UZqK",
+          "name": "Google Sheets account"
+        }
+      }
+    }
+  ],
+  "pinData": {
+    "When clicking ‘Execute workflow’": [
+      {
+        "json": {
+          "test": "if"
+        }
+      }
+    ],
+    "Get row(s) in sheet": [
+      {
+        "json": {
+          "row_number": 2,
+          "Кандидат": "rvkosmarskiy@cloud.ru",
+          "Этап": "Подходит",
+          "Роль": "Консультант",
+          "Команда": "Команда 1",
+          "Резюме": "",
+          "Интервьюер": "Павел Городилов",
+          "Баллы": 5,
+          "Примечания": ""
+        }
+      },
+      {
+        "json": {
+          "row_number": 3,
+          "Кандидат": "rvkosmarskiy@cloud.ru",
+          "Этап": "Собеседование",
+          "Роль": "Аналитик",
+          "Команда": "Команда 2",
+          "Резюме": "",
+          "Интервьюер": "Павел Городилов",
+          "Баллы": 4,
+          "Примечания": ""
+        }
+      },
+      {
+        "json": {
+          "row_number": 4,
+          "Кандидат": "vvolodin@infostart.ru",
+          "Этап": "Требуется решение",
+          "Роль": "Эксперт",
+          "Команда": "Команда 3",
+          "Резюме": "",
+          "Интервьюер": "Павел Городилов",
+          "Баллы": 3,
+          "Примечания": ""
+        }
+      },
+      {
+        "json": {
+          "row_number": 5,
+          "Кандидат": "ostogenka-4@yandex.ru",
+          "Этап": "Не подходит",
+          "Роль": "Старший консультант",
+          "Команда": "Команда 4",
+          "Резюме": "",
+          "Интервьюер": "Павел Городилов",
+          "Баллы": 1,
+          "Примечания": ""
+        }
+      }
+    ],
+    "Get row(s) in sheet1": [
+      {
+        "json": {
+          "row_number": 2,
+          "Кандидат": "ostogenka-4@yandex.ru",
+          "Этап": "Подходит",
+          "Роль": "Консультант",
+          "Команда": "Команда 1",
+          "Резюме": "",
+          "Интервьюер": "July Shell",
+          "Баллы": 5,
+          "Примечания": ""
+        }
+      },
+      {
+        "json": {
+          "row_number": 3,
+          "Кандидат": "s.starchak@oboronsoft.ru",
+          "Этап": "Собеседование",
+          "Роль": "Аналитик",
+          "Команда": "Команда 2",
+          "Резюме": "",
+          "Интервьюер": "July Shell",
+          "Баллы": 4,
+          "Примечания": ""
+        }
+      }
+    ]
+  },
+  "connections": {
+    "Loop Over Items": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        []
+      ]
+    },
+    "Get row(s) in sheet": {
+      "main": [
+        []
+      ]
+    },
+    "Get row(s) in sheet1": {
+      "main": [
+        []
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        []
+      ]
+    },
+    "Aggregate": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "callerPolicy": "workflowsFromSameOwner",
+    "availableInMCP": false,
+    "errorWorkflow": "HUl2Kwi1h4T7KcP8"
+  },
+  "versionId": "f9a95e4a-dde6-42b8-a402-53cdb0a7683f",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "ab7e7322f1f333bbe900bc0500389672242da86983f461f344793e261fb98977"
+  },
+  "id": "150VRuEum7Q8k7dT",
+  "tags": []
+}
