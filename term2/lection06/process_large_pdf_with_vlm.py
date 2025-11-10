@@ -84,7 +84,7 @@ def process_large_pdf(pdf_path: str):
                 print(f"Окончание: {time.strftime('%H:%M:%S')}")
                 
                 # Сохранение результатов
-                output_dir = Path("lection6/example/converted_md")
+                output_dir = Path("lection06/example/converted_md")
                 output_dir.mkdir(exist_ok=True, parents=True)
                 
                 base_name = "Настольная_книга_1С_эксперта"

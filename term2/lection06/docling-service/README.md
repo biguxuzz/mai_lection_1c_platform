@@ -25,7 +25,7 @@
 ### 1. Запуск через Docker Compose
 
 ```bash
-# Из корня проекта lection6
+# Из корня проекта lection06
 docker-compose up -d docling-service
 ```
 

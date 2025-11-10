@@ -133,14 +133,14 @@
 
 **Цель:** Проиндексировать лекцию об объектах хранения данных в 1С для демонстрации семантического поиска.
 
-**Исходный документ:** `term1\lection2\lection2.md` - лекция об объектах хранения данных в 1С (справочники, документы, регистры и т.д.)
+**Исходный документ:** `term1\lection02\lection02.md` - лекция об объектах хранения данных в 1С (справочники, документы, регистры и т.д.)
 
 **Демонстрация индексации в n8n:**
 
 1. **Создание нового workflow для индексации**
-   - Создать workflow "Index Lection2"
+   - Создать workflow "Index Lection02"
    - Добавить ноду "Read Binary File" для чтения markdown файла
-   - Настроить путь к файлу: `term1/lection2/lection2.md`
+   - Настроить путь к файлу: `term1/lection02/lection02.md`
 
 2. **Разбиение на чанки**
    - Добавить ноду "Code" для разбиения текста на чанки
@@ -154,7 +154,7 @@
 
 4. **Сохранение в Qdrant**
    - Добавить ноду "Qdrant" → "Upsert Vectors"
-   - Настроить коллекцию (например, "lection2_objects")
+   - Настроить коллекцию (например, "lection02_objects")
    - Передать векторы и метаданные:
      - Вектор: результат от Ollama Embedding
      - Payload: текст чанка, номер раздела, тип объекта
@@ -167,7 +167,7 @@
 **Проверка в Qdrant GUI:**
 
 1. Открыть Qdrant Dashboard (обычно http://localhost:6333/dashboard)
-2. Выбрать коллекцию `lection2_objects`
+2. Выбрать коллекцию `lection02_objects`
 3. Проверить:
    - Количество векторов
    - Размерность векторов
@@ -595,7 +595,7 @@ volumes:
 1. **Workflow "LightRAG Index"**
 
    **Нода 1: Read Binary File**
-   - Чтение документа (lection2.md)
+   - Чтение документа (lection02.md)
 
    **Нода 2: HTTP Request → LightRAG /api/index**
    - Method: POST
@@ -604,7 +604,7 @@ volumes:
      ```json
      {
        "text": "={{ $json.data }}",
-       "document_id": "lection2"
+       "document_id": "lection02"
      }
      ```
 

@@ -79,7 +79,7 @@
             "metadataValues": [
               {
                 "name": "source",
-                "value": "={{ $('On form submission').item.json.sourceName || 'lection7.md' }}"
+                "value": "={{ $('On form submission').item.json.sourceName || 'lection07.md' }}"
               },
               {
                 "name": "indexed_at",
