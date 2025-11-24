@@ -46,6 +46,11 @@ def init_qdrant():
             "vector_size": 384,
             "distance": Distance.COSINE
         },
+        "lecture_chunks_640": {
+            "description": "Чанки с 640-мерными embeddings (text-embedding-qwen3-embedding-4b)",
+            "vector_size": 640,
+            "distance": Distance.COSINE
+        },
         "lecture_chunks_768": {
             "description": "Чанки с 768-мерными embeddings (multilingual-e5-base, nomic-embed-text)",
             "vector_size": 768,

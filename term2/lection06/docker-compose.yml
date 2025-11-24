@@ -69,6 +69,16 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
 
+  docling-serve:
+    image: quay.io/docling-project/docling-serve
+    container_name: lection6_docling_serve
+    ports:
+      - "5001:5001"
+    environment:
+      - DOCLING_SERVE_ENABLE_UI=1
+    networks:
+      - rag_network
+
   lightrag-service:
     build: ./lightrag-service
     container_name: lection6_lightrag_service
@@ -194,20 +204,26 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
-      qdrant:
-        condition: service_healthy
-      rag-service:
-        condition: service_started
-      docling-service:
-        condition: service_started
-      lightrag-service:
-        condition: service_started
-      lightrag-webui:
-        condition: service_started
     networks:
       - rag_network
     extra_hosts:
       - "host.docker.internal:host-gateway"
+      - "BXZ-NOTE.WSL:172.17.238.77"
+
+  wsl-proxy:
+    image: alpine/socat:latest
+    container_name: lection6_wsl_proxy
+    # Проксирование порта 80 с BXZ-NOTE.WSL через host.docker.internal
+    # Требует настройки порт-форвардинга на хосте Windows (см. setup-wsl-port-forward.ps1)
+    command: TCP-LISTEN:8080,fork,reuseaddr TCP-CONNECT:host.docker.internal:18080
+    ports:
+      - "8080:8080"
+    networks:
+      - rag_network
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+      - "BXZ-NOTE.WSL:172.17.238.77"
+    restart: unless-stopped
 
 volumes:
   postgres_data:
@@ -226,4 +242,27 @@ volumes:
 networks:
   rag_network:
     driver: bridge
+    # Настройки для доступа к локальной сети хоста
+    # Включена IP маскарада для маршрутизации трафика в локальную сеть
+    driver_opts:
+      com.docker.network.bridge.enable_ip_masquerade: "true"
+      com.docker.network.bridge.enable_icc: "true"
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.25.0.0/16
+          gateway: 172.25.0.1
+    # Для доступа к конкретным хостам локальной сети добавьте их в extra_hosts каждого сервиса.
+    # Уже добавлено для всех сервисов:
+    #   - "host.docker.internal:host-gateway"     # доступ к хосту Docker
+    #   - "external-container:172.17.238.77"      # доступ к контейнеру в другой Docker сети
+    # Для добавления других хостов используйте формат:
+    #   - "имя-хоста:IP-адрес"                    # пример: "my-server:192.168.1.100"
+    # Примечание: Для доступа к WSL (172.17.238.77) из Docker контейнеров на Windows:
+    # Docker на Windows использует NAT, поэтому прямой доступ к WSL сети может не работать.
+    # Решения:
+    # 1. Использовать host.docker.internal для доступа к хосту, затем с хоста обращаться к WSL
+    # 2. Настроить маршрутизацию через Docker bridge gateway (требует дополнительной настройки)
+    # 3. Использовать проброс портов через хост для конкретных сервисов
+    # Запустите скрипт add-wsl-route.ps1 от имени администратора для настройки маршрута на хосте.
 
